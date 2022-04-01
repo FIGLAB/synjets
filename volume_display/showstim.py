@@ -48,7 +48,7 @@ def stat_close(p, ser):
     stream.close()
 
 def move_open(p, ser):
-    wf = wave.open('45hz_1.5sec.wav', 'rb')
+    wf = wave.open('45hz_1.5sec_ramp.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
@@ -65,7 +65,7 @@ def move_open(p, ser):
     stream.close()
 
 def move_close(p, ser):
-    wf = wave.open('45hz_1.5sec.wav', 'rb')
+    wf = wave.open('45hz_1.5sec_ramp.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
