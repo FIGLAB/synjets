@@ -29,7 +29,7 @@ def rightswipe(p, ser):
                     output=True)
     ser.write(bytes("right", 'utf-8'))
     ser.flush()
-    time.sleep(0.5)
+    time.sleep(1.5)
     ser.write(bytes("ls", 'utf-8'))
     ser.flush()
     time.sleep(0.05)
@@ -47,7 +47,7 @@ def leftswipe(p, ser):
                     output=True)
     ser.write(bytes("left", 'utf-8'))
     ser.flush()
-    time.sleep(0.5)
+    time.sleep(1.5)
     ser.write(bytes("rs", 'utf-8'))
     ser.flush()
     time.sleep(0.05)
@@ -64,7 +64,7 @@ def upswipe(p, ser):
                     output=True)
     ser.write(bytes("bot", 'utf-8'))
     ser.flush()
-    time.sleep(0.5)
+    time.sleep(1.5)
     ser.write(bytes("us", 'utf-8'))
     ser.flush()
     time.sleep(0.05)
@@ -81,7 +81,7 @@ def downswipe(p, ser):
                     output=True)
     ser.write(bytes("top", 'utf-8'))
     ser.flush()
-    time.sleep(0.5)
+    time.sleep(1.5)
     ser.write(bytes("ds", 'utf-8'))
     ser.flush()
     time.sleep(0.05)
@@ -98,7 +98,7 @@ def left(p, ser):
                     output=True)
     ser.write(bytes("left", 'utf-8'))
     ser.flush()
-    time.sleep(0.5)
+    time.sleep(1.5)
     playaudio(wf, stream)
     stream.stop_stream()
     stream.close()
@@ -112,7 +112,7 @@ def right(p, ser):
                     output=True)
     ser.write(bytes("right", 'utf-8'))
     ser.flush()
-    time.sleep(0.5)
+    time.sleep(1.5)
     playaudio(wf, stream)
     stream.stop_stream()
     stream.close()
@@ -126,7 +126,7 @@ def bot(p, ser):
                     output=True)
     ser.write(bytes("bot", 'utf-8'))
     ser.flush()
-    time.sleep(0.5)
+    time.sleep(1.5)
     playaudio(wf, stream)
     stream.stop_stream()
     stream.close()
@@ -140,7 +140,7 @@ def top(p, ser):
                     output=True)
     ser.write(bytes("top", 'utf-8'))
     ser.flush()
-    time.sleep(0.5)
+    time.sleep(1.5)
     playaudio(wf, stream)
     stream.stop_stream()
     stream.close()
@@ -154,35 +154,18 @@ def mid(p, ser):
                     output=True)
     ser.write(bytes("mid", 'utf-8'))
     ser.flush()
-    time.sleep(0.5)
+    time.sleep(1.5)
     playaudio(wf, stream)
     stream.stop_stream()
     stream.close()
 
-def circle(p, ser):
-    print("circle")
-    wf = wave.open('41hz_2sec.wav', 'rb')
-    stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
-                    channels=wf.getnchannels(),
-                    rate=wf.getframerate(),
-                    output=True)
-    ser.write(bytes("left", 'utf-8'))
-    ser.flush()
-    time.sleep(0.5)
-    ser.write(bytes("circle", 'utf-8'))
-    ser.flush()
-    time.sleep(0.05)
-    playaudio(wf, stream)
-    stream.stop_stream()
-    stream.close()
-
-numtimes = 3
-stimnames = ["top", "bot", "mid", "leftswipe", "rightswipe", "upswipe", "downswipe", "circle"]
-stims = [top, bot, mid, leftswipe, rightswipe, upswipe, downswipe, circle]
+numtimes = 4
+stimnames = ["top", "bot", "mid", "leftswipe", "rightswipe", "upswipe", "downswipe"]
+stims = [top, bot, mid, leftswipe, rightswipe, upswipe, downswipe]
 guesses = []
 counter = np.zeros(len(stims))
 if __name__ == "__main__":
-    f = open("data/" + str(round(time.time()))+".txt", "a")
+    f = open("../data/steering_" + str(round(time.time()))+".txt", "a")
     # instantiate PyAudio
     p = pyaudio.PyAudio()
     # instantiate Serial
@@ -194,9 +177,10 @@ if __name__ == "__main__":
         if len(counter) == 0: break
         idx = random.randint(0, len(stims)-1)
         func = stims[idx]
-        func(p, ser)
-        ans = input("What stimuli? ")
-        if ans == "n": continue
+        while True:
+            func(p, ser)
+            ans = input("What stimuli? ")
+            if ans != "n": break
         f.write(stimnames[idx] + " : " + ans + "\n")
         guesses.append((stimnames[idx], ans))
         counter[idx] += 1

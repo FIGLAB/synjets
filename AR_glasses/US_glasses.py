@@ -19,108 +19,92 @@ def playaudio(wf, stream):
         data = wf.readframes(CHUNK)
     wf.rewind()
 
-def stat_open(p, ser):
-    wf = wave.open('45hz_1.5sec.wav', 'rb')
+
+def front_to_back(p):
+    print("Front to back")
+    wf = wave.open('front_to_back.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
                     output=True)
-    ser.write(bytes("open", 'utf-8'))
-    ser.flush()
-    time.sleep(0.2)
     playaudio(wf, stream)
-    # stop stream
     stream.stop_stream()
     stream.close()
 
-def stat_close(p, ser):
-    wf = wave.open('45hz_1.5sec.wav', 'rb')
+
+def back_to_front(p):
+    print("Back to front")
+    wf = wave.open('back_to_front.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
                     output=True)
-    ser.write(bytes("close", 'utf-8'))
-    ser.flush()
-    time.sleep(0.2)
     playaudio(wf, stream)
-    # stop stream
     stream.stop_stream()
     stream.close()
 
-def move_open(p, ser):
-    wf = wave.open('45hz_1.5sec_ramp.wav', 'rb')
+def click_forward(p):
+    print("Click forward")
+    wf = wave.open('click_forward.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
                     output=True)
-    # ser.write(bytes("close", 'utf-8'))
-    # ser.flush()
-    # time.sleep(0.1)
-    stat_close(p,ser)
-    ser.write(bytes("mopen", 'utf-8'))
-    ser.flush()
-    time.sleep(0.05)
     playaudio(wf, stream)
-    # stop stream
     stream.stop_stream()
     stream.close()
-    stat_open(p,ser)
 
-def move_close(p, ser):
-    wf = wave.open('45hz_1.5sec_ramp.wav', 'rb')
+def click_backward(p):
+    print("Click backward")
+    wf = wave.open('click_backward.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
                     output=True)
-    # ser.write(bytes("open", 'utf-8'))
-    # ser.flush()
-    # time.sleep(0.1)
-    stat_open(p,ser)
-    ser.write(bytes("mclose", 'utf-8'))
-    ser.flush()
-    time.sleep(0.05)
     playaudio(wf, stream)
-    # stop stream
     stream.stop_stream()
     stream.close()
-    stat_close(p,ser)
 
-def move_open_close(p, ser):
-    wf = wave.open('45hz_2.5sec.wav', 'rb')
+def oppo_click(p):
+    print("opposite click")
+    wf = wave.open('click_opposite.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
                     output=True)
-    ser.write(bytes("open", 'utf-8'))
-    ser.flush()
-    time.sleep(0.1)
-    ser.write(bytes("moc", 'utf-8'))
-    ser.flush()
-    time.sleep(0.05)
     playaudio(wf, stream)
-    # stop stream
     stream.stop_stream()
     stream.close()
 
+numtimes = 4
+stimnames = ["front", "back", "click_for", "click_back", "oppose"]
+stims = [front_to_back, back_to_front, click_forward, click_backward, oppo_click]
+guesses = []
+counter = np.zeros(len(stims))
 if __name__ == "__main__":
+    f = open("../data/ARglasses_" + str(round(time.time()))+".txt", "a")
     # instantiate PyAudio
     p = pyaudio.PyAudio()
-    # instantiate Serial
-    ser = serial.Serial('COM11', baud, timeout=1)
-    time.sleep(3)
 
     # Run through all the stimuli randomly
-    print("1: open. 2: close. or break")
     while True:
-        stim = input("Which stimulus to play: ")
-        if stim == "break": break
-        elif stim == "1": stat_open(p, ser)
-        elif stim == "2": stat_close(p, ser)
-        elif stim == "3": move_open(p, ser)
-        elif stim == "4": move_close(p, ser)
-        elif stim == "5": move_open_close(p, ser)
+        if len(counter) == 0: break
+        idx = random.randint(0, len(stims)-1)
+        func = stims[idx]
+        while True:
+            func(p)
+            ans = input("What stimuli? ")
+            if ans != "n": break
+        f.write(stimnames[idx] + " : " + ans + "\n")
+        guesses.append((stimnames[idx], ans))
+        counter[idx] += 1
+        if counter[idx] == numtimes:
+            counter = np.delete(counter, idx)
+            del stimnames[idx]
+            del stims[idx]
 
+    print(guesses)
     # close everything
-    ser.close()
+    f.close()
     # close PyAudio
     p.terminate()

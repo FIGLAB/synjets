@@ -75,14 +75,14 @@ def low_click(p, ser, sec=5):
     stream.close()
 
 prevdist = 120
-dists = [20, 40, 60, 80, 100, 120, 140, 160]
+dists = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160]
 def closest(lst, K):
     return lst[min(range(len(lst)), key = lambda i: abs(lst[i]-K))]
 
 def detents(p, ser, sec=5):
     print("detents!")
     timestart = time.time()
-    wf = wave.open('sharp_100hz.wav', 'rb')
+    wf = wave.open('sharp_100hz_short.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
@@ -98,7 +98,7 @@ def detents(p, ser, sec=5):
             continue
         # print(feedback.strip())
         dist = float(feedback)
-        if abs(prevdist-dist) > 20 and abs(time.time()-timestart)>0.1:
+        if abs(prevdist-dist) > 10:
             audio.start()
             audio = threading.Thread(target=playaudio, args=(wf, stream,))
             timestart = time.time()
@@ -120,7 +120,7 @@ if __name__ == "__main__":
     print("Second number (x,x) is # of seconds.")
     while True:
         inp = input("Which stimulus to play: ")
-        if inp == "0": break
+        if inp == "0" or inp == "break": break
         stimnum, sec = inp.split(",")
         if int(stimnum) == 1: low_click(p, ser, int(sec))
         elif int(stimnum) == 2: high_click(p, ser, int(sec))

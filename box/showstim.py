@@ -19,8 +19,8 @@ def playaudio(wf, stream):
     wf.rewind()
 
 
-def continuous(p):
-    wf = wave.open('41hz_2sec.wav', 'rb')
+def wind(p):
+    wf = wave.open('wind.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
@@ -29,8 +29,8 @@ def continuous(p):
     stream.stop_stream()
     stream.close()
 
-def modulated(p):
-    wf = wave.open('41hzMOD_2sec.wav', 'rb')
+def fast_vibration(p):
+    wf = wave.open('fast_modulation.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
@@ -39,8 +39,18 @@ def modulated(p):
     stream.stop_stream()
     stream.close()
 
-def impulses(p):
-    wf = wave.open('41hz_impulses.wav', 'rb')
+def slow_vibration(p):
+    wf = wave.open('slow_modulation.wav', 'rb')
+    stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+                    channels=wf.getnchannels(),
+                    rate=wf.getframerate(),
+                    output=True)
+    playaudio(wf, stream)
+    stream.stop_stream()
+    stream.close()
+
+def pulses(p):
+    wf = wave.open('impulses.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
@@ -54,13 +64,13 @@ if __name__ == "__main__":
     # instantiate PyAudio
     p = pyaudio.PyAudio()
 
-    print("1: continuous. 2: modulated. 3:impulses")
+    print("1: wind. 2: vibration. 3:pulses")
     while True:
         stim = input("Which stimulus to play: ")
         if stim == "break": break
-        elif stim == "1": continuous(p)
-        elif stim == "2": modulated(p)
-        elif stim == "3": impulses(p)
+        elif stim == "1": wind(p)
+        elif stim == "2": fast_vibration(p)
+        elif stim == "3": pulses(p)
 
     # close PyAudio
     p.terminate()

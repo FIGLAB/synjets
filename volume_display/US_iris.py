@@ -104,12 +104,12 @@ def move_open_close(p, ser):
     stream.close()
 
 numtimes = 4
-stimnames = ["sopen", "sclose", "mopen", "mclose", "moc"]
-stims = [stat_open, stat_close, move_open, move_close, move_open_close]
+stimnames = ["sopen", "sclose"]
+stims = [stat_open, stat_close]
 guesses = []
 counter = np.zeros(len(stims))
 if __name__ == "__main__":
-    f = open("data/" + str(round(time.time()))+".txt", "a")
+    f = open("../data/iris_" + str(round(time.time()))+".txt", "a")
     # instantiate PyAudio
     p = pyaudio.PyAudio()
     # instantiate Serial
@@ -121,9 +121,10 @@ if __name__ == "__main__":
         if len(counter) == 0: break
         idx = random.randint(0, len(stims)-1)
         func = stims[idx]
-        func(p, ser)
-        ans = input("What stimuli? ")
-        if ans == "n": continue
+        while True:
+            func(p, ser)
+            ans = input("What stimuli? ")
+            if ans != "n": break
         f.write(stimnames[idx] + " : " + ans + "\n")
         guesses.append((stimnames[idx], ans))
         counter[idx] += 1

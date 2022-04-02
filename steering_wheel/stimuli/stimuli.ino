@@ -19,22 +19,22 @@ void loop() {
    String message = Serial.readString();
    
    //Print the message (or do other things)
-   if (message=="rs"){
+   if (message=="ls"){
       for(int pos = 20; pos < 120; pos += 5){
         servo1.write(pos);
         delay(50);
       }
-   } else if (message=="ls"){
+   } else if (message=="rs"){
       for(int pos = 115; pos > 20; pos -= 5){
         servo1.write(pos);
         delay(50);
       }
-   } else if (message=="us"){
+   } else if (message=="ds"){
       for(int pos = 115; pos > 20; pos -= 5){
         servo2.write(pos);
         delay(50);
       }
-   } else if (message=="ds"){
+   } else if (message=="us"){
       for(int pos = 20; pos < 120; pos += 5){
         servo2.write(pos);
         delay(50);
@@ -53,11 +53,13 @@ void loop() {
       servo2.write(70);
       delay(300);
    }
-   else if (message == "left"){ horiz_left(); vert_zero(); }
-   else if (message=="right"){ horiz_right(); vert_zero(); }
-   else if (message=="top"){ horiz_zero(); vert_top(); }
+   else if (message == "right"){ horiz_left(); vert_zero(); }
+   else if (message=="left"){ horiz_right(); vert_zero(); }
+   else if (message=="bot"){ horiz_zero(); vert_top(); }
+   else if (message=="midbot"){ horiz_zero(); servo2.write(45);}
    else if (message=="mid"){ horiz_zero(); vert_zero(); }
-   else if (message=="bot"){ horiz_zero(); vert_bot(); }
+   else if (message=="midtop"){ horiz_zero(); servo2.write(95);}
+   else if (message=="top"){ horiz_zero(); vert_bot(); }
 
    Serial.print(message);
  }

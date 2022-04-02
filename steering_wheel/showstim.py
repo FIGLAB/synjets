@@ -77,7 +77,7 @@ def downswipe(p, ser):
                     output=True)
     ser.write(bytes("top", 'utf-8'))
     ser.flush()
-    time.sleep(0.5)
+    time.sleep(1.5)
     ser.write(bytes("ds", 'utf-8'))
     ser.flush()
     time.sleep(0.05)
@@ -93,7 +93,7 @@ def left(p, ser):
                     output=True)
     ser.write(bytes("left", 'utf-8'))
     ser.flush()
-    time.sleep(0.5)
+    time.sleep(1)
     playaudio(wf, stream)
     stream.stop_stream()
     stream.close()
@@ -106,33 +106,72 @@ def right(p, ser):
                     output=True)
     ser.write(bytes("right", 'utf-8'))
     ser.flush()
-    time.sleep(0.5)
+    time.sleep(1)
     playaudio(wf, stream)
     stream.stop_stream()
     stream.close()
 
 def bot(p, ser):
-    wf = wave.open('41hz_1.5sec.wav', 'rb')
+    wf = wave.open('41hzMOD_1.5sec.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
                     output=True)
     ser.write(bytes("bot", 'utf-8'))
     ser.flush()
-    time.sleep(0.5)
+    time.sleep(1.5)
+    playaudio(wf, stream)
+    stream.stop_stream()
+    stream.close()
+
+def top(p, ser):
+    wf = wave.open('41hzMOD_1.5sec.wav', 'rb')
+    stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+                    channels=wf.getnchannels(),
+                    rate=wf.getframerate(),
+                    output=True)
+    ser.write(bytes("top", 'utf-8'))
+    ser.flush()
+    time.sleep(1.5)
+    playaudio(wf, stream)
+    stream.stop_stream()
+    stream.close()
+
+def midtop(p, ser):
+    wf = wave.open('41hzMOD_1.5sec.wav', 'rb')
+    stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+                    channels=wf.getnchannels(),
+                    rate=wf.getframerate(),
+                    output=True)
+    ser.write(bytes("midtop", 'utf-8'))
+    ser.flush()
+    time.sleep(1)
+    playaudio(wf, stream)
+    stream.stop_stream()
+    stream.close()
+
+def midbot(p, ser):
+    wf = wave.open('41hzMOD_1.5sec.wav', 'rb')
+    stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+                    channels=wf.getnchannels(),
+                    rate=wf.getframerate(),
+                    output=True)
+    ser.write(bytes("midbot", 'utf-8'))
+    ser.flush()
+    time.sleep(1)
     playaudio(wf, stream)
     stream.stop_stream()
     stream.close()
 
 def mid(p, ser):
-    wf = wave.open('41hz_1.5sec.wav', 'rb')
+    wf = wave.open('41hzMOD_1.5sec.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
                     output=True)
     ser.write(bytes("mid", 'utf-8'))
     ser.flush()
-    time.sleep(0.5)
+    time.sleep(1.5)
     playaudio(wf, stream)
     stream.stop_stream()
     stream.close()
@@ -161,14 +200,13 @@ if __name__ == "__main__":
     time.sleep(3)
 
     # Run through all the stimuli randomly
+    print("Options: mid, bot, top, leftswipe, rightswipe, upswipe, downswipe. or break")
     while True:
         stim = input("Which stimulus to play: ")
         if stim == "break": break
         elif stim == "mid": mid(p, ser)
         elif stim == "bot": bot(p, ser)
         elif stim == "top": top(p, ser)
-        elif stim == "left": left(p, ser)
-        elif stim == "right": right(p, ser)
         elif stim == "leftswipe": leftswipe(p, ser)
         elif stim == "rightswipe": rightswipe(p, ser)
         elif stim == "upswipe": upswipe(p, ser)

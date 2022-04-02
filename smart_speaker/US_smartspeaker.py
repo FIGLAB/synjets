@@ -113,7 +113,7 @@ stims = [low_click, high_click, detents]
 guesses = []
 counter = np.zeros(len(stims))
 if __name__ == "__main__":
-    f = open("data/" + str(round(time.time()))+".txt", "a")
+    f = open("../data/smartspeaker_" + str(round(time.time()))+".txt", "a")
     # instantiate PyAudio
     p = pyaudio.PyAudio()
     # instantiate Serial
@@ -125,9 +125,10 @@ if __name__ == "__main__":
         if len(counter) == 0: break
         idx = random.randint(0, len(stims)-1)
         func = stims[idx]
-        func(p, ser)
-        ans = input("What stimuli? ")
-        if ans == "n": continue
+        while True:
+            func(p, ser)
+            ans = input("What stimuli? ")
+            if ans != "n": break
         f.write(stimnames[idx] + " : " + ans + "\n")
         guesses.append((stimnames[idx], ans))
         counter[idx] += 1

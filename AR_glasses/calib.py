@@ -6,7 +6,7 @@ import time
 
 # TURN VOLUME 100!
 CHUNK = 1024
-wf = wave.open('30hz_1sec.wav', 'rb')
+wf = wave.open('20hz_mod1hz_2node.wav', 'rb')
 # instantiate PyAudio
 p = pyaudio.PyAudio()
 # open stream
@@ -15,7 +15,7 @@ stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                 rate=wf.getframerate(),
                 output=True)
 
-for i in range(6):
+for i in range(2):
     # read data
     data = wf.readframes(CHUNK)
     # play stream
