@@ -1,0 +1,12 @@
+modulated : v
+modulated : v
+continuous : w
+modulated : v
+modulated : v
+continuous : w
+continuous : w
+continuous : w
+impulses : p
+impulses : p
+impulses : p
+impulses : p

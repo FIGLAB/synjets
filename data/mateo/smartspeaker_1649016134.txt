@@ -1,0 +1,12 @@
+low_click : l
+detents : d
+low_click : l
+high_click : h
+high_click : h
+detents : d
+low_click : l
+detents : d
+low_click : l
+detents : d
+high_click : h
+high_click : h

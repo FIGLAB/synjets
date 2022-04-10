@@ -119,7 +119,7 @@ def right(p, ser):
 
 def bot(p, ser):
     print("bot")
-    wf = wave.open('41hz_1.5sec.wav', 'rb')
+    wf = wave.open('41hzMOD_1.5sec.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
@@ -133,7 +133,7 @@ def bot(p, ser):
 
 def top(p, ser):
     print("top")
-    wf = wave.open('41hz_1.5sec.wav', 'rb')
+    wf = wave.open('41hzMOD_1.5sec.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
@@ -147,7 +147,7 @@ def top(p, ser):
 
 def mid(p, ser):
     print("mid")
-    wf = wave.open('41hz_1.5sec.wav', 'rb')
+    wf = wave.open('41hzMOD_1.5sec.wav', 'rb')
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),

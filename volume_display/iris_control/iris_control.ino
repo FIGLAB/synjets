@@ -24,10 +24,10 @@ void loop() {
   while (Serial.available() > 0)
  {
    String message = Serial.readString();
-   if (message=="open"){
+   if (message=="open" || message=="open\n"){
     myservo.write(0);
     delay(50);
-   } else if (message=="close"){
+   } else if (message=="close" || message=="close\n"){
     myservo.write(40);
     delay(50);
    } else if (message=="mopen"){

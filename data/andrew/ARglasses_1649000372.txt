@@ -1,0 +1,20 @@
+back : b
+click_for : cf
+click_back : cb
+oppose : cb / co
+front : f
+front : f
+click_back : cb
+oppose : cb / co
+click_back : cb
+oppose : cb / co
+click_back : cb
+oppose : cb / co
+back : b
+front : f
+front : f
+back : b
+click_for : cf
+back : b
+click_for : cf
+click_for : cf
