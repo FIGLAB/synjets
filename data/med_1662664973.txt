@@ -1,0 +1,7 @@
+continuous:4
+modulated:3
+impulse:4
+single:3
+focus:3
+swipe:4
+direction:2

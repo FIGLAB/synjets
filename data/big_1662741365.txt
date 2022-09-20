@@ -1,0 +1,4 @@
+continuous:1
+modulated:2
+impulse:2
+single:2
