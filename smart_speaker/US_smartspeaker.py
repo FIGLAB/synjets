@@ -32,10 +32,10 @@ def high_click(p, ser):
     timezero = time.time()
     while time.time()-timezero < 5:
         feedback = ser.readline().decode('utf-8')
-        if "ERROR" in feedback.strip():
+        if "ERROR" in feedback.strip() or feedback.strip() == "":
             dist = 0.0
             continue
-        # print(feedback.strip())
+        print(feedback.strip())
         dist = float(feedback)
         if dist > 80 and dist < 120 and abs(time.time()-timestart)>0.5:
             audio.start()
@@ -59,10 +59,10 @@ def low_click(p, ser):
     timezero = time.time()
     while time.time()-timezero < 5:
         feedback = ser.readline().decode('utf-8')
-        if "ERROR" in feedback.strip():
+        if "ERROR" in feedback.strip() or feedback.strip() == "":
             dist = 0.0
             continue
-        # print(feedback.strip())
+        print(feedback.strip())
         dist = float(feedback)
         if dist < 40 and abs(time.time()-timestart)>0.5:
             audio.start()
@@ -92,10 +92,10 @@ def detents(p, ser):
     timezero = time.time()
     while time.time()-timezero < 5:
         feedback = ser.readline().decode('utf-8')
-        if "ERROR" in feedback.strip():
+        if "ERROR" in feedback.strip() or feedback.strip() == "":
             dist = 0.0
             continue
-        # print(feedback.strip())
+        print(feedback.strip())
         dist = float(feedback)
         if abs(prevdist-dist) > 20 and abs(time.time()-timestart)>0.1:
             audio.start()
@@ -113,11 +113,11 @@ stims = [low_click, high_click, detents]
 guesses = []
 counter = np.zeros(len(stims))
 if __name__ == "__main__":
-    f = open("../data/smartspeaker_" + str(round(time.time()))+".txt", "a")
+    # f = open("../data/smartspeaker_" + str(round(time.time()))+".txt", "a")
     # instantiate PyAudio
     p = pyaudio.PyAudio()
     # instantiate Serial
-    ser = serial.Serial('COM13', baud, timeout=1)
+    ser = serial.Serial('COM4', baud, timeout=1)
     time.sleep(3)
 
     # Run through all the stimuli randomly
@@ -129,7 +129,7 @@ if __name__ == "__main__":
             func(p, ser)
             ans = input("What stimuli? ")
             if ans != "n": break
-        f.write(stimnames[idx] + " : " + ans + "\n")
+        # f.write(stimnames[idx] + " : " + ans + "\n")
         guesses.append((stimnames[idx], ans))
         counter[idx] += 1
         if counter[idx] == numtimes:
@@ -140,7 +140,7 @@ if __name__ == "__main__":
     print(guesses)
 
     # close everything
-    f.close()
+    # f.close()
     ser.close()
     # close PyAudio
     p.terminate()
