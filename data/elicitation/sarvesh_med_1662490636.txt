@@ -1,9 +1,0 @@
-continuous:1
-modulated:1
-impulse:1
-single:2
-focus:2
-swipe_left:4
-swipe_right:3
-left:3
-right:2
