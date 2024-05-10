@@ -1,6 +1,5 @@
 # Expressive, Scalable, Mid-air Haptics with Synthetic Jets
 
-### NOTE: Instructables and further details/files still being updated!
 Open source code for <a href="https://dl.acm.org/doi/10.1145/3635150"> Expressive, Scalable, Mid-air Haptics with Synthetic Jets </a>.
 This paper was published in the ACM Transactions on Computer-Human Interaction in January 2024. The paper will be presented at CHI 2024.
 Contact me with questions <a href="vivian-shen.com">here</a>!
