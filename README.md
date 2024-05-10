@@ -4,6 +4,7 @@ Open source code for <a href="https://dl.acm.org/doi/10.1145/3635150"> Expressiv
 This paper was published in the ACM Transactions on Computer-Human Interaction in January 2024. The paper will be presented at CHI 2024.
 Contact me with questions <a href="vivian-shen.com">here</a>!
 
+##### Note that the instructables is still in progress!
 ### Repository Contents
  - Demo Code has code used for a few of the demos with moving parts, i.e. steering wheel servos, unity code used for the HMD demo, etc.
  - Demo Stimuli has audacity files with the stimuli wavs for each application
@@ -13,8 +14,21 @@ Contact me with questions <a href="vivian-shen.com">here</a>!
 
 ### Assembly Instructions
 
-COMING VERY SOON: Bill of Materials
-COMING SOON: Instructables on assembling a synthetic jet yourself
+The BoM is in the repository - these are just the materials we use, but synjets can be built with many different speakers, for a wide variety of devices!
+
+Here is a brief summary of the assembly instructions. We will also have an instructables out very soon.
+1) Choose the speaker you are using. Roughly, the larger the speaker, the farther/stronger the range of the synjet.
+2) Fabricate the enclosure. I have included all the design files compatible with the speakers we've used - if you are using our tiniest speaker, we just cut a small hole out of cardstock and glued that on top.
+3) If using the small class D amplifier, you can power it either through a 5V USB connection from your computer, or a 9-12V power adapter. Either way, strip one end of the cable and attach power to VCC and ground to GND on the amplifier.
+![image](https://github.com/FIGLAB/synjets/assets/8129002/23a8b25d-f7d2-4656-97f0-5d614127991d)
+4) Attach wires to the two terminals of your speaker, and then wire them to R+ and R- (or L+ and L-). The polarity doesn't really matter.
+5) Plug in the USB power and an audio cable to your computer.
+6) Play an appropriate sine wave through Audacity or any other audio software (you can find demo WAV files in stimuli recognition study).
+7) Slowly turn the knob up. If everything went right you should be able to feel a stream!
+![image](https://github.com/FIGLAB/synjets/assets/8129002/1b0b3c49-e4e2-443b-a549-340866c46fcc)
+
+
+
 
 ## License
 
