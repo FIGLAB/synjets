@@ -4,7 +4,6 @@ Open source code for <a href="https://dl.acm.org/doi/10.1145/3635150"> Expressiv
 This paper was published in the ACM Transactions on Computer-Human Interaction in January 2024. The paper will be presented at CHI 2024.
 Contact me with questions <a href="vivian-shen.com">here</a>!
 
-##### Note that the instructables is still in progress!
 ### Repository Contents
  - Demo Code has code used for a few of the demos with moving parts, i.e. steering wheel servos, unity code used for the HMD demo, etc.
  - Demo Stimuli has audacity files with the stimuli wavs for each application
@@ -13,21 +12,19 @@ Contact me with questions <a href="vivian-shen.com">here</a>!
  - Stimuli Recognition Study contains all the stimuli used for the recognition study, as well as the python files used to automate the study.
 
 ### Assembly Instructions
-
+Instructables <a href="https://www.instructables.com/Haptic-Synthetic-Jet/">Link</a>
 The BoM is in the repository - these are just the materials we use, but synjets can be built with many different speakers, for a wide variety of devices!
 
-Here is a brief summary of the assembly instructions. We will also have an instructables out very soon.
+Here is a brief summary of the assembly instructions. 
 1) Choose the speaker you are using. Roughly, the larger the speaker, the farther/stronger the range of the synjet.
-2) Fabricate the enclosure. I have included all the design files compatible with the speakers we've used - if you are using our tiniest speaker, we just cut a small hole out of cardstock and glued that on top.
-3) If using the small class D amplifier, you can power it either through a 5V USB connection from your computer, or a 9-12V power adapter. Either way, strip one end of the cable and attach power to VCC and ground to GND on the amplifier.
+2) Fabricate the enclosure. The design files compatible with the speakers we used can be found in this repository. We laser cut these out of acrylic to put on the speakers. If you are using our tiniest speaker, instead poke a small hole in some cardstock and glue that on top.
+3) For all speakers but the largest one, the small class D amplifier can be used. It can be powered either through a 5V USB connection from your computer, or a 9-12V power adapter. Either way, strip one end of the cable and attach power to VCC and ground to GND on the amplifier.
 ![image](https://github.com/FIGLAB/synjets/assets/8129002/23a8b25d-f7d2-4656-97f0-5d614127991d)
-4) Attach wires to the two terminals of your speaker, and then wire them to R+ and R- (or L+ and L-). The polarity doesn't really matter.
+4) Attach wires to the two terminals of your speaker, and then wire them to R+ and R- (or L+ and L-). The polarity doesn't really matter. The other speaker terminals can be used for a second synjet, just be cognizant of the L/R audio signals coming from the audio cable.
 5) Plug in the USB power and an audio cable to your computer.
-6) Play an appropriate sine wave through Audacity or any other audio software (you can find demo WAV files in stimuli recognition study).
-7) Slowly turn the knob up. If everything went right you should be able to feel a stream!
+6) Using Audacity (or any other audio software, like Audition), play an appropriate sine wave for your synjet. Start with the resonant frequency of your speaker (which can be found on the online spec sheet), and then you can tune it from there. You can also find demo WAV files in the "Stimuli Recognition Study" folder on the Github.
+7) Slowly turn the knob up. If everything went right you should be able to feel a stream of air!
 ![image](https://github.com/FIGLAB/synjets/assets/8129002/1b0b3c49-e4e2-443b-a549-340866c46fcc)
-
-
 
 
 ## License
